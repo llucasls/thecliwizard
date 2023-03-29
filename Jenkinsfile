@@ -9,7 +9,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshagent(['wizard-pipeline-id']) {
-                    sh 'rsync -avz --delete --exclude=".git" --recursive --chown=www-data:www-data . lucas@cassandra:/var/www/thecliwizard.xyz/'
+                    sh 'rsync -vz --delete --exclude=".git" --exclude=".gitignore" --exclude="Jenkinsfile" --recursive --chown=www-data:www-data . lucas@31.220.109.252:/var/www/thecliwizard.xyz/'
                 }
             }
         }
