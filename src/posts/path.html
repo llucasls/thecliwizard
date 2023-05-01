@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The CLI Wizard - How to add directories to your PATH</title>
+    <link rel="stylesheet/less" type="text/css" href="../style.less" />
+    <link rel="stylesheet/less" type="text/css" href="../home.less" />
+    <script src="https://cdn.jsdelivr.net/npm/less" ></script>
+  </head>
+
+  <body>
+    <main>
+      <h1>How to add directories to your PATH</h1>
+
+      <p>This is my first post in this blog, and I thought I should make
+        something useful out of it, and teach you guys how to add directories
+        to your PATH variable in a Linux/Unix system. So without further ado,
+        let's get to it.</p>
+      <p>For this small tutorial, I'm assuming you're already acquainted with
+        the terminal and you know the most basic commands, such as
+        <span>ls</span>, <span>cd</span>, etc. And you've already written your
+        own shell scripts, though that could also be talked about in another
+        post.</p>
+      <p>Have you ever wondered why some commands require you to
+        <span>cd</span> into the same directory of the executable, and type
+        <span>./command</span>, while others just need the name of the command,
+        and can be executed from anywhere? That's because those commands are
+        executable files in one of the directories in your <span>PATH</span>.
+        "And what is this PATH?" you might ask. It is a list of directories with
+        all the directories that contain the commands you can execute from your
+        terminal. To be more precise, it is an environment variable with a
+        single string that shows you the full path to each of the directories
+        your system will search for the commands you execute, separated by
+        colons. To see the value of your PATH, you can use the command
+        <span>echo ${PATH}</span>. Your tipical PATH will look something like
+        the one below.
+      </p>
+      <div>
+        $ echo ${PATH}<br>
+        /usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
+      </div>
+      <p>These are the most basic directories to guarantee your system works as
+      it should. With the exception of /usr/local/bin, if you erase any of them
+      from your PATH, then you're in for a bad surprise. Though, there are also
+      ways to circumvent that.</p>
+    </main>
+  </body>
+</html>
