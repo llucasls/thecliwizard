@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +43,7 @@
         something like the one below.
       </p>
       <pre>
-<span style="user-select: none; font-style: normal;">$ </span>echo "${PATH}"
+<span class="prompt">$ </span>echo "${PATH}"
 /usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin</pre>
       <p>
         These are the most basic directories to guarantee your system works as
@@ -60,8 +60,8 @@
         in two simple steps:
       </p>
       <pre>
-<span style="user-select: none; font-style: normal;">$ </span>PATH="${HOME}/.local/bin:${PATH}"
-<span style="user-select: none; font-style: normal;">$ </span>export PATH</pre>
+<span class="prompt">$ </span>PATH="${HOME}/.local/bin:${PATH}"
+<span class="prompt">$ </span>export PATH</pre>
       <p>
         The first command creates a shell variable with the same name as the
         environment variable we want to replace, and it references the
@@ -120,9 +120,9 @@
         commands you need:
       </p>
       <pre>
-<span style="user-select: none; font-style: normal;">$ </span>/bin/sudo -i
-<span style="user-select: none; font-style: normal;"># </span>cd /home/wizard  # use your own username
-<span style="user-select: none; font-style: normal;"># </span>vim .profile</pre>
+<span class="prompt">$ </span>/bin/sudo -i
+<span class="prompt"># </span>cd /home/wizard  <span class="comment"># use your own username</span>
+<span class="prompt"># </span>vim .profile</pre>
       <p>
         The first command requires the full path, since you borked the
         <code>PATH</code> environment variable. The <code>-i</code> flag
@@ -140,8 +140,8 @@
         commands below:
       </p>
       <pre>
-<span style="user-select: none; font-style: normal;"># </span>mv .profile another_file     # mv can be used to either move or rename
-<span style="user-select: none; font-style: normal;"># </span>rename pro amateur .profile  # relax, we've all been there</pre>
+<code><span class="prompt"># </span>mv .profile another_file     <span class="comment"># mv can be used to either move or rename</span>
+<span class="prompt"># </span>rename pro amateur .profile  <span class="comment"># relax, we've all been there</span></code></pre>
       <p>
         After that, you can type <code>exit</code> twice to log out, and go
         back to tty1 with <code>Ctrl + Alt + F1</code>. If you used
