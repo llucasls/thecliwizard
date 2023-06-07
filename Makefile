@@ -2,7 +2,11 @@ PYTHON = python3
 VENV   = $(CURDIR)/.venv
 PIP    = $(VENV)/bin/$(PYTHON) -m pip
 
-install: $(VENV)
+NODE_MODULES = $(CURDIR)/node_modules
+
+LESS = $(NODE_MODULES)/.bin/lessc
+
+install: $(VENV) $(NODE_MODULES)
 
 publish:
 	rsync -vz --delete --recursive --chown=www-data:www-data src/ lucas@cassandra:/var/www/thecliwizard.xyz/
@@ -12,7 +16,14 @@ $(VENV): requirements.txt
 	$(PIP) install --upgrade pip -r $<
 	touch $@
 
+$(NODE_MODULES): package.json
+	yarn
+	touch $@
+
 %.html: %.jinja | $(VENV)
 	$(VENV)/bin/$(PYTHON) genjin.py -o $@ $<
 
-.SILENT: $(VENV)
+%.css: %.less | $(NODE_MODULES)
+	$(LESS) $< $@
+
+.SILENT: $(VENV) $(NODE_MODULES)
