@@ -20,10 +20,10 @@ $(NODE_MODULES): package.json
 	yarn
 	touch $@
 
-%.html: %.jinja | $(VENV)
+dist/%.html: src/%.jinja $(VENV) | dist
 	$(VENV)/bin/$(PYTHON) genjin.py -o $@ $<
 
-%.css: %.less | $(NODE_MODULES)
+dist/%.css: src/%.less $(NODE_MODULES) | dist
 	$(LESS) $< $@
 
 dist:
