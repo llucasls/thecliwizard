@@ -26,4 +26,10 @@ $(NODE_MODULES): package.json
 %.css: %.less | $(NODE_MODULES)
 	$(LESS) $< $@
 
-.SILENT: $(VENV) $(NODE_MODULES)
+dist:
+	mkdir dist
+
+clean: | dist
+	-rm -rf dist/*
+
+.SILENT: $(VENV) $(NODE_MODULES) dist
