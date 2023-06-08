@@ -1,0 +1,9 @@
+{
+  "name": "thecliwizard",
+  "version": "1.0.0",
+  "private": true,
+  "repository": "git@github.com:llucasls/thecliwizard.git",
+  "dependencies": {
+    "less": "^4.1.3"
+  }
+}
