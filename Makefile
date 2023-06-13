@@ -29,10 +29,10 @@ $(NODE_MODULES): package.json
 	touch $@
 
 dist/%.html: src/%.jinja $(VENV) | dist
-	$(VENV)/bin/$(PYTHON) genjin.py -o $@ $<
+	@$(VENV)/bin/$(PYTHON) genjin.py -o $@ $<
 
 dist/%.css: src/%.less $(NODE_MODULES) | dist
-	$(LESS) $< $@
+	@$(LESS) $< $@
 
 dist:
 	mkdir dist
@@ -40,4 +40,4 @@ dist:
 clean: | dist
 	-rm -rf dist/*
 
-.SILENT: $(VENV) $(NODE_MODULES) dist
+.SILENT: $(VENV) $(NODE_MODULES) dist clean
