@@ -5,7 +5,7 @@ Usage:
     genjin.py [options] <template>
 
 Options:
-    -o, --output=<output>  Choose output file
+    -o, --output=<output>  Write resulting content into output file
 """
 import sys
 from datetime import datetime
