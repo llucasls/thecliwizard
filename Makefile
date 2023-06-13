@@ -6,6 +6,14 @@ NODE_MODULES = $(CURDIR)/node_modules
 
 LESS = $(NODE_MODULES)/.bin/lessc
 
+LESS_FILES  != find src/ -name '*.less'
+JINJA_FILES != find src/ -name '*.jinja'
+
+CSS_FILES  := $(patsubst src/%.less,dist/%.css,$(LESS_FILES))
+HTML_FILES := $(patsubst src/%.jinja,dist/%.html,$(JINJA_FILES))
+
+build: clean $(CSS_FILES) $(HTML_FILES)
+
 install: $(VENV) $(NODE_MODULES)
 
 publish:
