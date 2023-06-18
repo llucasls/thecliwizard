@@ -5,6 +5,7 @@ PIP    = $(VENV)/bin/$(PYTHON) -m pip
 NODE_MODULES = $(CURDIR)/node_modules
 
 LESS = $(NODE_MODULES)/.bin/lessc
+LIVE_SERVER = $(NODE_MODULES)/.bin/live-server
 
 LESS_FILES  != find src/ -name '*.less'
 JINJA_FILES != find src/ -name '*.jinja'
@@ -28,6 +29,9 @@ $(NODE_MODULES): package.json
 	yarn
 	touch $@
 
+dev: build
+	node $(LIVE_SERVER) dist/index.html
+
 dist/%.html: src/%.jinja $(VENV) | dist
 	@$(VENV)/bin/$(PYTHON) genjin.py -o $@ $<
 
@@ -40,4 +44,6 @@ dist:
 clean: | dist
 	-rm -rf dist/*
 
-.SILENT: $(VENV) $(NODE_MODULES) dist clean
+.SILENT: $(VENV) $(NODE_MODULES) dist clean dev
+
+.PHONY: build install publish dev clean
