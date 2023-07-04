@@ -39,7 +39,7 @@ def main():
         with open(html_file, mode="w") as file:
             file.write(str(soup))
     except Exception:
-        print("failed to write file", file=sys.stderr)
+        print("failed to write to file", file=sys.stderr)
         return 2
 
     return 0
