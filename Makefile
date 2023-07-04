@@ -18,7 +18,7 @@ build: clean $(CSS_FILES) $(HTML_FILES)
 install: $(VENV) $(NODE_MODULES)
 
 publish:
-	rsync -vz --delete --recursive --chown=www-data:www-data src/ lucas@cassandra:/var/www/thecliwizard.xyz/
+	rsync -vz --delete --recursive --chown=www-data:www-data dist/ lucas@cassandra:/var/www/thecliwizard.xyz/
 
 $(VENV): requirements.txt
 	if test ! -d $(VENV); then $(PYTHON) -m venv $(VENV); fi
