@@ -21,12 +21,10 @@ def main():
 
     try:
         with open(html_file, mode="r") as file:
-            content = file.read()
+            soup = BeautifulSoup(file, "html.parser")
     except Exception:
         print("failed to read file", file=sys.stderr)
         return 1
-
-    soup = BeautifulSoup(content, "html.parser")
 
     main_element = soup.find("main")
     list_element = main_element.find("ol")
