@@ -1,0 +1,154 @@
+{% extends "base.jinja" %}
+{% block title %} - How to add directories to your PATH{% endblock %}
+{% block style %}<link rel="stylesheet" href="/style/post.css" />{% endblock %}
+{% block body %}
+<main>
+  <header>
+    <h1>How to add directories to your PATH</h1>
+    <time datetime={{ iso_date }}>{{ date }}</time>
+  </header>
+
+  <p>
+    This is my first post in this blog, and I thought I should make
+    something useful out of it, and teach you guys how to add directories
+    to your PATH variable in a Linux/Unix system. So without further ado,
+    let's get to it.
+  </p>
+  <p>
+    For this small tutorial, I'm assuming you're already acquainted with
+    the terminal and you know the most basic commands, such as
+    <code>ls</code>, <code>cd</code>, etc. And you've already written your
+    own shell scripts, though that could also be talked about in another
+    post.
+  </p>
+  <p>
+    Have you ever wondered why some commands require you to <code>cd</code>
+    into the same directory of the executable, and type
+    <code>./command</code>, while others just need the name of the command,
+    and can be executed from anywhere? That's because those commands are
+    executable files in one of the directories in your <code>PATH</code>.
+    "And what is this PATH?" you might ask. It is a list of directories
+    with all the directories that contain the commands you can execute from
+    your terminal. To be more precise, it is an environment variable with a
+    single string that shows you the full path to each of the directories
+    your system will search for the commands you execute, separated by
+    colons. To see the value of your PATH, you can use the command
+    <code>echo ${PATH}</code>. Your tipical <code>PATH</code> will look
+    something like the one below.
+  </p>
+  <pre>
+<span class="prompt">$ </span>echo "${PATH}"
+/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin</pre>
+  <p>
+    These are the most basic directories to guarantee your system works as
+    it should. With the exception of /usr/local/bin, if you erase any of
+    them from your <code>PATH</code>, then you're in for a bad surprise.
+    Though, there are also ways to circumvent that. We'll get to that in a
+    moment.
+  </p>
+  <p>
+    So now, you can see the directories available in your
+    <code>PATH</code>. But how can you add more to the list? Let's say you
+    want to add <code>~/.local/bin</code> to the list, which is in fact a
+    pretty common directory for your own scripts. To add it, you can do it
+    in two simple steps:
+  </p>
+  <pre>
+<span class="prompt">$ </span>PATH="${HOME}/.local/bin:${PATH}"
+<span class="prompt">$ </span>export PATH</pre>
+  <p>
+    The first command creates a shell variable with the same name as the
+    environment variable we want to replace, and it references the
+    variables <code>HOME</code> and <code>PATH</code> in its value. The
+    second command exports it so it can be read by all child processes,
+    effectively making it an environment variable.
+  </p>
+  <p>
+    Notice the symbols, such
+    as braces, quotation marks, equal sign and dollar sign. The dollar sign
+    makes a reference to a shell variable or an environment variable,
+    allowing you to read its value. The braces are optional, but they
+    ensure you take the whole word as the name of the variable. You can use
+    <code>$HOME</code> to read the value of <code>HOME</code>, for example.
+    But if you have variables called <code>H</code>, <code>HO</code> or
+    <code>HOM</code>, they'll get in the way. So the braces prevent that.
+    The quotation marks are also optional, but they ensure the value read
+    is a single string. Not really needed in this case, but it's nice to
+    get used to them when setting variables. And notice the name of the
+    variable and the value after the assignement are "glued" to the equal
+    sign. It is actually supposed to be like that, and putting spaces
+    either before or after it will mess it up. Oh, and using <code>~</code>
+    will not work as your home directory. You have to use the
+    <code>HOME</code> environment variable, which expands into the full
+    path of your home directory.
+  </p>
+  <p>
+    However, this new <code>PATH</code> is only valid for the current
+    instance of the terminal. If you close it and open another one, the
+    variable will be reset to its previous value. That happens because
+    environment variables can only pass from parent to child processes, not
+    the other way around. So how can you make it valid for all terminals
+    you might open up? You can do it in your <code>.profile</code>, in most
+    cases. If your login shell is bash, and you have a
+    <code>.bash_profile</code> or <code>.bash_login</code>, those will take
+    priority over <code>.profile</code>. If you use zsh, then you have
+    <code>.zprofile</code>. If you use <code>startx</code> to log in, then
+    you have to edit <code>.xinitrc</code>. And if you use <code>xdm</code>
+    as your display manager, then you have to edit
+    <code>.Xresources</code>.
+  </p>
+  <p>
+    So now, what happens if you erase the <code>PATH</code> variable? Or
+    you forget the dollar sign in <code>${PATH}</code>, which is basically
+    the same thing? Next time you try to log in, if you type your password
+    wrong, you will get an error message and not be able to log in,
+    obviously. But if you type it right, it will simply error silently, and
+    you'll also not be able to log in. So what you should do is press
+    <code>Ctrl + Alt + F2</code> to go into tty2, or any other up until
+    tty6. The tty1 is where your graphical session is, for most display
+    managers. Once you reach the tty, type in your username and password.
+    You should be able to log in, and be greeted with an entirely black
+    terminal covering your whole screen. No GUI here. Also, no commands.
+    You have to write the whole path for each command, but if you log into
+    root with sudo, the <code>PATH</code> should be fine. So, putting the
+    commands you need:
+  </p>
+  <pre>
+<span class="prompt">$ </span>/bin/sudo -i
+<span class="prompt"># </span>cd /home/wizard  <span class="comment"># use your own username</span>
+<span class="prompt"># </span>vim .profile</pre>
+  <p>
+    The first command requires the full path, since you borked the
+    <code>PATH</code> environment variable. The <code>-i</code> flag
+    means <code>--login</code>, which will let you use the
+    <code>root</code> user account, with all its privileges. Then you
+    change directory into your own user's <code>HOME</code>. If you use
+    <code>cd</code>, <code>cd ~</code> or <code>cd $HOME</code>, you will
+    be taken to <code>/root</code>, the root user's home directory. You
+    DO NOT want to mess with this directory, so make sure you change into
+    the right one. You can check your current directory with
+    <code>pwd</code>. Now, open the <code>.profile</code> file with your
+    favorite text editor. GUI editors won't work here, so you can't use
+    gedit, kate or vscode. If you don't know how to use vim or nano, then
+    you can rename <code>.profile</code> with either one of those
+    commands below:
+  </p>
+  <pre>
+<code><span class="prompt"># </span>mv .profile old_profile  <span class="comment"># mv can be used to either move or rename</span>
+</code></pre>
+  <p>
+    After that, you can type <code>exit</code> twice to log out, and go
+    back to tty1 with <code>Ctrl + Alt + F1</code>. If you used
+    <code>vim</code> or <code>nano</code>, or <code>nvim</code>, or
+    <code>emacsclient --tty</code> (who knows), then your <code>PATH</code>
+    variable is edited correctly. If you renamed it, then you can rename it
+    back to <code>.profile</code> (or whatever your usual login script name
+    is) and make sure you write it correctly this time.
+  </p>
+  <p>
+    There you go. Your new directory is added to your <code>PATH</code>.
+    Put whatever scripts or binaries into this new directory, and hack
+    away!
+  </p>
+</main>
+{% endblock %}
