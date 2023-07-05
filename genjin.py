@@ -1,7 +1,7 @@
 """genjin.py - Generate HTML from Jinja2 templates
 
 Usage:
-    genjin.py [-h | --help]
+    genjin.py (-h | --help)
     genjin.py [options] <template>
 
 Options:
