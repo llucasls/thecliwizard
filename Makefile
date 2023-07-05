@@ -33,9 +33,11 @@ dev: build
 	node $(LIVE_SERVER) dist/index.html
 
 dist/%.html: src/%.jinja $(VENV) | dist
+	@mkdir -p $(dir $@)
 	@$(VENV)/bin/$(PYTHON) genjin.py -o $@ $<
 
 dist/%.css: src/%.less $(NODE_MODULES) | dist
+	@mkdir -p $(dir $@)
 	@$(LESS) $< $@
 
 dist:
