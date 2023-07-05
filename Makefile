@@ -27,7 +27,7 @@ publish:
 	rsync -vz --delete --recursive --chown=www-data:www-data dist/ lucas@cassandra:/var/www/thecliwizard.xyz/
 
 $(VENV): requirements.txt
-	if test ! -d $(VENV); then $(PYTHON) -m venv $(VENV); fi
+	if test ! -d $@; then $(PYTHON) -m venv $@; fi
 	$(PIP) install --upgrade pip -r $<
 	touch $@
 
