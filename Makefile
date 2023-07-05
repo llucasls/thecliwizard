@@ -19,12 +19,14 @@ DIST_HTML_FILES != find dist/ -name '*.html'
 NO_SRC := $(filter-out $(CSS_FILES),$(DIST_CSS_FILES))
 NO_SRC += $(filter-out $(HTML_FILES),$(DIST_HTML_FILES))
 
+RSYNC_FLAGS := -vz --delete --recursive --chown=www-data:www-data
+
 build: clean $(CSS_FILES) $(HTML_FILES)
 
 install: $(VENV) $(NODE_MODULES)
 
 publish:
-	rsync -vz --delete --recursive --chown=www-data:www-data dist/ lucas@cassandra:/var/www/thecliwizard.xyz/
+	rsync $(RSYNC_FLAGS) dist/ lucas@cassandra:/var/www/thecliwizard.xyz/
 
 $(VENV): requirements.txt
 	if test ! -d $@; then $(PYTHON) -m venv $@; fi
