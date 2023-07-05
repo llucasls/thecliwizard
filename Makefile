@@ -13,6 +13,12 @@ JINJA_FILES != find src/ -name '*.jinja'
 CSS_FILES  := $(patsubst src/%.less,dist/%.css,$(LESS_FILES))
 HTML_FILES := $(patsubst src/%.jinja,dist/%.html,$(JINJA_FILES))
 
+DIST_CSS_FILES  != find dist/ -name '*.css'
+DIST_HTML_FILES != find dist/ -name '*.html'
+
+NO_SRC := $(filter-out $(CSS_FILES),$(DIST_CSS_FILES))
+NO_SRC += $(filter-out $(HTML_FILES),$(DIST_HTML_FILES))
+
 build: clean $(CSS_FILES) $(HTML_FILES)
 
 install: $(VENV) $(NODE_MODULES)
@@ -43,8 +49,8 @@ dist/%.css: src/%.less $(NODE_MODULES) | dist
 dist:
 	mkdir dist
 
-clean: | dist
-	-rm -rf dist/*
+clean: $(NO_SRC) | dist
+	if test -n "$^"; then rm $^; fi
 
 .SILENT: $(VENV) $(NODE_MODULES) dist clean dev
 
