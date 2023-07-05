@@ -28,7 +28,7 @@ else:
     template_file = options["<template>"]
 
 
-date = datetime.today().strftime("%B %d, %Y")
+date = datetime.today().strftime("%d %b %Y")
 iso_date = datetime.today().date().isoformat()
 template = env.get_template(template_file)
 rendered_html = template.render(date=date, iso_date=iso_date)
