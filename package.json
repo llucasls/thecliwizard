@@ -5,6 +5,19 @@
   "repository": "git@github.com:llucasls/thecliwizard.git",
   "dependencies": {
     "less": "^4.1.3",
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.2",
+    "nodemon": "^2.0.22"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".venv/",
+      "node_modules/",
+      "dist/"
+    ],
+    "ext": "jinja,less",
+    "watch": [
+      "src/"
+    ],
+    "exec": "make --silent --no-print-directory build"
   }
 }
