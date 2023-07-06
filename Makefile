@@ -4,8 +4,9 @@ PIP    = $(VENV)/bin/$(PYTHON) -m pip
 
 NODE_MODULES = $(CURDIR)/node_modules
 
-LESS = $(NODE_MODULES)/.bin/lessc
+LESS        = $(NODE_MODULES)/.bin/lessc
 LIVE_SERVER = $(NODE_MODULES)/.bin/live-server
+NODEMON     = $(NODE_MODULES)/.bin/nodemon
 
 LESS_FILES  != find src/ -name '*.less'
 JINJA_FILES != find src/ -name '*.jinja'
@@ -37,8 +38,8 @@ $(NODE_MODULES): package.json
 	yarn
 	touch $@
 
-dev: build
-	node $(LIVE_SERVER) dist/index.html
+dev:
+	$(NODEMON) | node $(LIVE_SERVER) dist/
 
 dist/%.html: src/%.jinja $(VENV) | dist
 	@mkdir -p $(dir $@)
