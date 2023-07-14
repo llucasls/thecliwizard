@@ -1,6 +1,7 @@
 PYTHON = python3
 VENV   = $(CURDIR)/.venv
 PIP    = $(VENV)/bin/$(PYTHON) -m pip
+YARN   = yarn
 
 NODE_MODULES = $(CURDIR)/node_modules
 
@@ -35,7 +36,7 @@ $(VENV): requirements.txt
 	touch $@
 
 $(NODE_MODULES): package.json
-	yarn
+	$(YARN)
 	touch $@
 
 dev:
