@@ -1,3 +1,8 @@
+@white: #e1e1e1;
+@blue: #1e80e1;
+@orange: #e1801e;
+@purple: #8769e1;
+
 header {
     display: flex;
     flex-direction: column;
@@ -5,9 +10,20 @@ header {
 
     h1 {
         align-self: center;
+        font-size: 2em;
     }
 
     time {
         align-self: flex-end;
     }
+}
+
+a:link {
+  color: @purple;
+}
+a:visited {
+  color: @purple;
+}
+a:hover {
+  color: @blue;
 }
