@@ -1,5 +1,29 @@
-main {
+@white: #e1e1e1;
+@blue: #1e80e1;
+@orange: #e1801e;
+@purple: #8769e1;
+
+ul {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  li {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    a {
+      align-self: flex-start;
+    }
+    a:link {
+      color: @white;
+    }
+    a:visited {
+      color: @purple;
+    }
+    a:hover {
+      color: @blue;
+    }
+    time {
+      align-self: flex-end;
+    }
+  }
 }
