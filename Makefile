@@ -21,7 +21,8 @@ DIST_HTML_FILES != find dist/ -name '*.html'
 NO_SRC := $(filter-out $(CSS_FILES),$(DIST_CSS_FILES))
 NO_SRC += $(filter-out $(HTML_FILES),$(DIST_HTML_FILES))
 
-RSYNC_FLAGS := -vz --delete --recursive --chown=www-data:www-data
+RSYNC_FLAGS := --verbose --compress --delete --recursive \
+               --chown=www-data:www-data
 
 build: clean $(CSS_FILES) $(HTML_FILES)
 
