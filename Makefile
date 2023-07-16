@@ -42,7 +42,7 @@ $(NODE_MODULES): package.json
 dev:
 	$(NODEMON) | node $(LIVE_SERVER) dist/
 
-dist/%.html: src/%.jinja $(VENV) | dist
+dist/%.html: src/%.jinja $(VENV) base.jinja | dist
 	@mkdir -p $(dir $@)
 	@$(VENV)/bin/$(PYTHON) genjin.py -o $@ $<
 
