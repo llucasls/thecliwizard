@@ -3,6 +3,24 @@
 @orange: #e1801e;
 @purple: #8769e1;
 
+@portrait: (orientation: portrait);
+@landscape: (orientation: landscape) and (max-width: 999px);
+@desktop: (orientation: landscape) and (min-width: 1000px);
+
+body {
+  @media @portrait {
+    font-size: 3em;
+  }
+
+  @media @landscape {
+    font-size: 1.6em;
+  }
+
+  @media @desktop {
+    font-size: 1em;
+  }
+}
+
 ul {
   display: flex;
   align-items: stretch;
