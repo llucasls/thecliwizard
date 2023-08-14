@@ -7,19 +7,72 @@
 @landscape: (orientation: landscape) and (max-width: 999px);
 @desktop: (orientation: landscape) and (min-width: 1000px);
 
-header {
+body {
+  header {
     display: flex;
     flex-direction: column;
     align-items: center;
 
     h1 {
-        align-self: center;
-        font-size: 2em;
+      align-self: center;
     }
 
     time {
-        align-self: flex-end;
+      align-self: flex-end;
     }
+  }
+
+  @media @portrait {
+    header {
+      h1 {
+        font-size: 4.5em;
+        color: green;
+      }
+    }
+
+    time {
+      font-size: 2.5em;
+    }
+
+    p {
+      font-size: 1em;
+      color: red;
+    }
+  }
+
+  @media @landscape {
+    header {
+      h1 {
+        font-size: 3em;
+      }
+    }
+
+    time {
+      font-size: 1.5em;
+    }
+
+    p {
+      font-size: 1.5em;
+      color: green;
+    }
+  }
+
+  @media @desktop {
+    header {
+      h1 {
+        font-size: 2em;
+      }
+    }
+
+    time {
+      font-size: .9em;
+    }
+
+    p {
+      font-size: 1em;
+      color: @blue;
+    }
+  }
 }
 
 a:link {
