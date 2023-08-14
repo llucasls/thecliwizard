@@ -8,6 +8,37 @@
 @desktop: (orientation: landscape) and (min-width: 1000px);
 
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  main {
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      li {
+        display: flex;
+        flex-direction: column;
+        a {
+          align-self: flex-start;
+        }
+        a:link {
+          color: @white;
+        }
+        a:visited {
+          color: @purple;
+        }
+        a:hover {
+          color: @blue;
+        }
+        time {
+          align-self: flex-end;
+        }
+      }
+    }
+  }
+
   @media @portrait {
     font-size: 3em;
   }
@@ -18,30 +49,5 @@ body {
 
   @media @desktop {
     font-size: 1em;
-  }
-}
-
-ul {
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-  li {
-    display: flex;
-    flex-direction: column;
-    a {
-      align-self: flex-start;
-    }
-    a:link {
-      color: @white;
-    }
-    a:visited {
-      color: @purple;
-    }
-    a:hover {
-      color: @blue;
-    }
-    time {
-      align-self: flex-end;
-    }
   }
 }
