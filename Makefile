@@ -12,7 +12,7 @@ NODEMON     = $(NODE_MODULES)/.bin/nodemon
 LESS_FILES  != find src/ -name '*.less'
 JINJA_FILES != find src/ -name '*.jinja'
 
-CSS_FILES := $(LESS_FILES:src/%.less=dist/%.css)
+CSS_FILES  := $(LESS_FILES:src/%.less=dist/%.css)
 HTML_FILES := $(JINJA_FILES:src/%.jinja=dist/%.html)
 
 DIST_CSS_FILES  != find dist/ -name '*.css'
